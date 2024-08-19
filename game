@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мене створили, щоб я дізнався скільки вам років</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Зараз вгадаю вік ваш</h2>
+
+    <label for="number">Вибери число від 2 до 10:</label>
+    <input type="number" id="number" min="2" max="10">
+
+    <label for="birthday">Чи був у тебе день народження цього року? (так/ні):</label>
+    <input type="text" id="birthday">
+
+    <label for="year">Введи рік свого народження:</label>
+    <input type="number" id="year">
+
+    <button onclick="calculate()">Розрахувати</button>
+
+    <p id="result"></p>
+</div>
+
+<script>
+    function calculate() {
+        let n = parseInt(document.getElementById("number").value);
+        let dr = document.getElementById("birthday").value.trim().toLowerCase();
+        let y = parseInt(document.getElementById("year").value);
+
+        if (isNaN(n) || n < 2 || n > 10) {
+            alert("Будь ласка, виберіть число в межах від 2 до 10.");
+            return;
+        }
+
+        if (isNaN(y)) {
+            alert("Будь ласка, введіть правильний рік.");
+            return;
+        }
+
+        let x = n * 2;
+        x += 5;
+        x *= 50;
+        x += 1773;
+
+        if (dr === 'так') {
+            x += 1;
+        }
+
+        x -= y;
+
+        document.getElementById("result").textContent = 
+            `Результат: ${x}. Вийшло тризначне число, де перша цифра - це число, яке ти вибрав (${n}), а дві наступні - це твій вік.`;
+    }
+</script>
+
+</body>
+</html>
